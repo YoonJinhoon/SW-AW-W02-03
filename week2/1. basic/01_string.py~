@@ -34,11 +34,11 @@ def is_palindrome(s):
 
     while left < right:
         # 1. 왼쪽 포인터가 alpha/num 이 아니면, 오른쪽으로 이동하며 건너뜀
-        while left < right and not s[left].isalnum():
+        while not s[left].isalnum():
             left += 1
 
         # 2 . 오른쪽 포인터가 alpha/num 이 아니면, 왼쪽으로 이동하며 건너뜀
-        while left < right and not s[right].isalnum():
+        while not s[right].isalnum():
             right -= 1
 
         # 3.
