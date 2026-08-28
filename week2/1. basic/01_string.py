@@ -24,6 +24,55 @@
 - 문자열을 뒤집어서 비교하거나, 양 끝에서 시작해 중앙으로 이동하며 비교하세요
 """
 
+
+import re
+
+def is_palindrome(s: str) -> bool:
+
+    """
+    파이써닉 방식:
+    정규식으로 alpha/num 만 남기고 소문자로 바꾼 뒤,
+    슬라이싱을 이용해 문자열을 뒤집어서 원본과 비교한다.
+    """
+
+    # 1. alpha/num 만 골라내서 소문자로 변환
+    cleaned = ''.join(char.lower() for char in s if char.isalnum())
+
+    # 2. 뒤집은 문자열과 비교
+    return cleaned == cleaned[::-1]
+
+
+# 테스트 케이스
+if __name__ = "__main__":
+    # 테스트 케이스 1
+    test1 = "A man, a plan, a canal: Panama"
+    result1 = is_palindrome(test1)
+    print(f"입력: \"{test1}\"")
+    print(f"회문 여부: {result1}")
+    print()
+
+    # 테스트 케이스 2
+    test2 = "race a car"
+    result2 = is_palindrome(test2)
+    print(f"입력: \"{test2}\"")
+    print(f"회문 여부: {result2}")
+    print()
+
+    # 테스트 케이스 3
+    test3 = "Was it a car or a cat I saw?"
+    result3 = is_palindrome(test3)
+    print(f"입력: \"{test3}\"")
+    print(f"회문 여부: {result3}")
+    print()
+
+    # 테스트 케이스 4
+    test4 = "Madam"
+    result4 = is_palindrome(test4)
+    print(f"입력: \"{test4}\"")
+    print(f"회문 여부: {result4}")
+
+
+"""
 def is_palindrome(s):
     
     # TODO: 알파벳과 숫자만 남기고 소문자로 변환하세요
@@ -88,3 +137,4 @@ if __name__ == "__main__":
     print(f"회문 여부: {result4}")
 
 
+"""
