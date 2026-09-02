@@ -19,30 +19,27 @@
 힌트:
 - left, right 포인터 사용
 - mid = (left + right) // 2
-- arr[mid]와 target 비교하여 범위 조정
+- arr[mid]와 target 비i교하여 범위 조정
 """
 
 def binary_search(arr, target):
-    """
-    이분 탐색 구현
-    
-    Args:
-        arr: 정렬된 배열
-        target: 찾을 값
-    
-    Returns:
-        target의 인덱스 (없으면 -1)
-    """
+    # arr: 정렬된 배열
+    # target 찾을 값
+
     left = 0
     right = len(arr) - 1
-    
-    # TODO: left가 right보다 작거나 같을 때까지 반복
-    ## 중간 인덱스 계산
-    ## arr[mid]와 target 비교
-    ## 같으면 mid 반환
-    ## target이 더 크면 left = mid + 1
-    ## target이 더 작으면 right = mid - 1
-    pass
+
+    # left가 right보다 작거나 같을 때까지 반복
+    while left <= right:
+        # 중간 인덱스 계산
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
     
     return -1
 
