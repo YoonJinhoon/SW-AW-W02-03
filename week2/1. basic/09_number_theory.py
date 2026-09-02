@@ -34,10 +34,12 @@ def gcd(a, b):
     Returns:
         최대공약수
     """
-    # TODO: 유클리드 호제법 구현
-    # base case: b가 0이면 a 반환
-    # recursive를 이용 
-    pass
+    # 1. The Guard Check FIRST
+    if b == 0:
+        return a
+
+    # 2. The Modulo operation AFTER
+    return gcd(b, a % b)
 
 def gcd_iterative(a, b):
     """
@@ -50,8 +52,9 @@ def gcd_iterative(a, b):
         최대공약수
     """
     # TODO: 반복문으로 구현
-    # b가 0이 될 때까지 반복
-    pass
+    while b != 0:
+        a, b = b, a % b
+    return a
 
 def lcm(a, b):
     """
@@ -64,12 +67,12 @@ def lcm(a, b):
         최소공배수
     """
     # TODO: LCM 계산
-    pass
+    return a * b // gcd(a, b)
 
 def extended_gcd(a, b):
     """
     확장 유클리드 호제법
-    ax + by = gcd(a, b)를 만족하는 x, y를 찾음
+    ax + by = gcd(a,i b)를 만족하는 x, y를 찾음
     
     Args:
         a, b: 두 양의 정수
@@ -78,10 +81,18 @@ def extended_gcd(a, b):
         (gcd, x, y) 튜플
     """
     # TODO: 확장 유클리드 호제법 구현
-    # base case: b가 0이면 (a, 1, 0) 반환    
-    # recursive case
     # 역추적하며 x, y 계산
-    pass
+    if b == 0:
+        return (a, 1, 0)
+    
+    # Recursive case: 다음 단계로 들어가서 g, x1, y1 을 받아옴
+    g, x1, y1 = extended_gcd(b, a % b)
+
+    # 역추적하며 현재 층의 x, y 계산
+    x = y1
+    y = x1 - (a // b) * y1
+
+    return (g, x, y)
 
 def is_prime(n):
     """
@@ -95,9 +106,29 @@ def is_prime(n):
     """
     # TODO: 소수 판별 구현
     # n이 2보다 작으면 False
-    # 2부터 sqrt(n)까지 나누어 떨어지는지 확인    
+    # 2부터 sqrti(n)까지 나누어 떨어지는지 확인    
     # 3부터 sqrt(n)까지 홀수만 확인
-    pass 
+    
+    # n이 2보다 작으면, False (0, 1, 음수 차단)
+    if n < 2:
+        return False
+
+    # 2는 유일한 짝수 소수이므로 예외 처리
+    if n == 2:
+        return True
+
+    # 2를 제외한 나머지 짝수는 모두 합성수이므로 즉시 탈출
+    if n % 2 == 0:
+        return False
+
+    # 3부터 sqrt(n)까지 홀수만 확인 (i * i <= n은 sqrt(n)과 같음)
+    i = 3 
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2  # 짝수 건너뛰고, 다음 홀수로 (+2)
+
+    return True 
 
 # 테스트 케이스
 if __name__ == "__main__":
