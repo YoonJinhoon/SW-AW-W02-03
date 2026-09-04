@@ -7,10 +7,10 @@
 - 피벗(pivot)을 기준으로 작은 값과 큰 값을 분할하여 재귀적으로 정렬합니다.
 
 입력:
-- arr: 정렬되지 않은 정수 배열
+arr: 정렬되지 않은 정수 배열
 
 출력:
-- 오름차순으로 정렬된 배열
+오름차순으로 정렬된 배열
 
 예제:
 입력: [10, 7, 8, 9, 1, 5]
@@ -25,37 +25,41 @@
 def partition(arr, low, high):
     """
     배열을 피벗 기준으로 분할하는 함수
-    
-    Args:
         arr: 배열
         low: 시작 인덱스
         high: 끝 인덱스
-    
-    Returns:
-        피벗의 최종 위치 인덱스
+
+    Returns: 피벗의 최종 위치 인덱스
     """
-    # TODO: 피벗을 선택 (일반적으로 마지막 원소)
-    pass
+    # 피벗을 선택 (일반적으로 마지막 원소를 선택) (Lamuto partition algorithm)
+    pivot = arr[high]
     
-    # TODO: i는 작은 원소들의 마지막 인덱스를 추적
-    pass
+    # 포인터 2개 초기화 (i, j)
+        # i 는 -1 부터 시작
+        # j 는 low 부터 시작, 피벗과 비교할 때 필요한 인덱스
+
+    # 피벗보다 작은 원소들의 마지막 인덱스를 추적하는 변수 i
+    i = low - 1
     
     # TODO: low부터 high-1까지 순회하면서
     ## 현재 원소가 피벗보다 작거나 같으면:
     ##   1. i를 1 증가
     ##   2. arr[i]와 arr[j]를 교환
-    pass
+    ## 현재 원소가 피벗보다 크면, do nothing
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
     
     # TODO: 피벗을 올바른 위치(i+1)에 배치
-    pass
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
     
     return i + 1
 
 def quick_sort_helper(arr, low, high):
     """
     퀵 정렬 재귀 함수
-    
-    Args:
+
         arr: 배열
         low: 시작 인덱스
         high: 끝 인덱스
@@ -64,18 +68,21 @@ def quick_sort_helper(arr, low, high):
     ## 분할하여 피벗 인덱스 얻기
     ## 피벗 왼쪽 부분 재귀 정렬
     ## 피벗 오른쪽 부분 재귀 정렬
-    pass 
+    if low < high:
+
+        pivot = partition(arr, low, high)
+
+        quick_sort_helper(arr, low, pivot - 1)
+
+        quick_sort_helper(arr, pivot + 1, high)
     
 
 def quick_sort(arr):
     """
     퀵 정렬 메인 함수
     
-    Args:
         arr: 정렬할 배열
-    
-    Returns:
-        정렬된 배열
+        Returns: 정렬된 배열
     """
     quick_sort_helper(arr, 0, len(arr) - 1)
     return arr
