@@ -35,27 +35,49 @@ DP 문제 풀이 순서:
 5. 구현 및 검증
 """
 
-def climb_stairs(n):
+
+# V1. Bottom-up DP (Tabulation)
+"""
+def climbStairs(n):
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
+"""
+
+# V2. Plain Recursion
+"""
+def clibStairs(n):
+    if n <= 2:
+        return n
+    return climbStairs(n - 1) + ClimbStairs(n - 2)
+"""
+
+# V3. Top-down DP (Memoization)
+"""
+def climbStairs(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n <= 2:
+        return n
+    memo[n] = climbStairs(n - 1, memo) + climbStairs(n - 2, memo)
+    return memo[n]
+"""
+
+def climb_stairs(n):    # Bottom-Up
     """
-    계단 오르기 (상향식 DP)
-    
-    Args:
-        n: 계단의 수
-    
-    Returns:
-        n번째 계단까지 오르는 방법의 수
+    n: 계단의 수
+    return: n번째 계단까지 오르는 방법의 수
     """
     # TODO: 특별한 경우 처리
-    pass
-    
-    
-    # TODO: dp 배열 생성 및 초기화
-    pass
-    
-    # TODO: 작은 문제부터 차례로 계산
-    pass
-    
-    return dp[n]
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
 
 # 테스트 케이스
 if __name__ == "__main__":
