@@ -36,26 +36,21 @@ DP 문제 풀이 순서:
 """
 
 
-# V1. Bottom-up DP (Tabulation)
-"""
-def climbStairs(n):
-    if n <= 2:
-        return n
-    a, b = 1, 2
-    for _ in range(3, n + 1):
-        a, b = b, a + b
-    return b
-"""
 
-# V2. Plain Recursion
+# V1. Plain Recursion (The Naive Way)   ### time: O(2^n) ###
 """
 def clibStairs(n):
     if n <= 2:
         return n
     return climbStairs(n - 1) + ClimbStairs(n - 2)
 """
+"""
+### dp[i] = dp[i - 1] + dp[i - 2]
 
-# V3. Top-down DP (Memoization)
+### last step: only 2cases (1-step 또는 2-step)
+
+
+# V2. Top-down DP (Memoization)         ### time: O(n) ###
 """
 def climbStairs(n, memo={}):
     if n in memo:
@@ -63,10 +58,13 @@ def climbStairs(n, memo={}):
     if n <= 2:
         return n
     memo[n] = climbStairs(n - 1, memo) + climbStairs(n - 2, memo)
-    return memo[n]
-"""
+    return memo[n]  
 
-def climb_stairs(n):    # Bottom-Up
+
+
+# V3. Bottom-up DP (Tabulation)         ### time: O(n), space: O(n) ###
+
+def climb_stairs(n):    
     """
     n: 계단의 수
     return: n번째 계단까지 오르는 방법의 수
